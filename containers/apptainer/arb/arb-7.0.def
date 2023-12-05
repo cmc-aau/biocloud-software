@@ -23,7 +23,7 @@ From: ubuntu:20.04
   #install dependencies
   apt-get update -y
   DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
-    gnuplot gv libmotif-common libxm4 libxerces-c3.2 transfig xfig xterm locales wget perl curl
+    gnuplot gv libmotif-common libxm4 libxerces-c3.2 transfig xfig xterm locales wget perl curl xauth
 
   ### clean up
   rm -rf /var/lib/apt/lists/* /var/cache/apt/*
