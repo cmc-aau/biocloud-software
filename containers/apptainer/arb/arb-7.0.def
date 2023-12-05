@@ -1,0 +1,45 @@
+BootStrap: docker
+From: ubuntu:20.04
+
+%labels
+  Maintainer Kasper Skytte Andersen
+  Version 7.0
+
+%help
+  Arb 7.0 in a container.
+
+%environment
+  export LC_ALL="en_US.UTF-8"
+  export LANG="en_US.UTF-8"
+  export PATH="${PATH}:/opt/arb/bin"
+
+%files
+  files/arb_install_answers.txt /opt/arb_install_answers.txt
+  files/arb_profile.sh /etc/profile.d/arb_profile.sh
+
+%post
+  sed -i 's/archive.ubuntu.com/dk.archive.ubuntu.com/g' /etc/apt/sources.list
+
+  #install dependencies
+  apt-get update -y
+  DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends --no-install-suggests \
+    gnuplot gv libmotif-common libxm4 libxerces-c3.2 transfig xfig xterm locales wget perl curl
+
+  ### clean up
+  rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+  ### Configure default locales before installing additional pkgs
+  echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+  locale-gen en_US.utf8
+  /usr/sbin/update-locale LANG=en_US.UTF-8
+  export LC_ALL=en_US.UTF-8
+  export LANG=en_US.UTF-8
+
+  tmpdir=$(mktemp -d)
+  cd "$tmpdir"
+  wget http://download.arb-home.de/release/arb-7.0/arb-7.0.ubuntu2004-amd64.tgz
+  tar zxf arb-7.0.ubuntu2004-amd64.tgz
+  bash arb_install.sh < /opt/arb_install_answers.txt
+
+%runscript
+    exec arb 2>&1
