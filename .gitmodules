@@ -1,0 +1,3 @@
+[submodule "alphafold_singularity"]
+	path = alphafold_singularity
+	url = git@github.com:cmc-aau/alphafold_singularity.git
