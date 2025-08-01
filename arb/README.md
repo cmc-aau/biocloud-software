@@ -13,15 +13,14 @@ Adjust responses to the interactive install script in the `files/arb_install_ans
 
 Then build container with:
 ```
-apptainer build -F arb-7.0.sif arb-7.0.def
+apptainer build -F arb-7.0.sif ../containers/apptainer/arb/arb-7.0.def
 ```
 
 ## Usage
+On biocloud running this script will run the container with all Ceph mount points mounted inside the container. Adjust to suit your needs elsewhere.
 ```
-apptainer run -B ~/.Xauthority arb-7.0.sif
+bash run.sh
 ```
-
-`.Xauthority` must be mounted for the X client to authenticate with the X server. Remember to bind/mount other folders if you need. By default only `/tmp`, `/home`, and the current wd are mounted with apptainer.
 
 ## Notes
 `export PATH="${PATH}:/opt/arb/bin"` is under `%environment` must match the path set in `files/arb_install_answers.txt`. But shouldn't need to be changed.

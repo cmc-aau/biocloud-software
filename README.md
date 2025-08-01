@@ -1,4 +1,4 @@
 # biocloud-software
-Repo for all sorts of software, mainly modules or containers. Refer to the invididual readme's for instructions.
+Repo for all sorts of software, mainly containers. Refer to the invididual readme's for instructions.
 
-Clone this RECURSIVELY!!
+The `containers/` folder is for container images produced from the individual recipes.
