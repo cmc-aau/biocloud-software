@@ -13,7 +13,7 @@ Adjust responses to the interactive install script in the `files/arb_install_ans
 
 Then build container with:
 ```
-apptainer build -F arb-7.0.sif ../containers/apptainer/arb/arb-7.0.def
+apptainer build -F arb-7.0.sif arb-7.0.def
 ```
 
 ## Usage
