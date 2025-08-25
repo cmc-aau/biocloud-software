@@ -14,4 +14,4 @@ touch "${file_path}"
 apptainer run \
   -B "${file_path}":/opt/arb/lib/nas/names_start.dat \
   -B ~/.Xauthority \
-  -B /projects -B /raw_data -B /databases "$EXEC_DIRNAME"/arb-7.0.sif
+  -B /projects -B /raw_data -B /databases "$EXEC_DIRNAME"/arb-7.0.sif "$@"
