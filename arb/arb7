@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# path to where this script is located
-EXEC_DIRNAME=$(dirname "$0")
+# resolve the real directory of this script (follow symlinks)
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+EXEC_DIRNAME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 # create tmp folder for arb in our home folder and create the file
 arbtmp="${HOME}/.tmp/arb7"
@@ -11,7 +17,9 @@ file_path="${arbtmp}/${filename}"
 mkdir -p "$arbtmp"
 touch "${file_path}"
 
+# run arb from the container
 apptainer run \
   -B "${file_path}":/opt/arb/lib/nas/names_start.dat \
   -B ~/.Xauthority \
-  -B /projects -B /raw_data -B /databases "$EXEC_DIRNAME"/arb-7.0.sif "$@"
+  -B /projects -B /raw_data -B /databases \
+  "$EXEC_DIRNAME/arb-7.0.sif" "$@"
