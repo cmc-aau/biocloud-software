@@ -1,4 +1,5 @@
-# Apptainer container with arb
+# Apptainer container with arb7
+Arb 7.0 is not available from conda or biocontainers.pro, so this is a custom apptainer container build recipe.
 
 ## Build
 Adjust responses to the interactive install script in the `files/arb_install_answers.txt` file. Would have been nice with non-interactive support right? Each line answers the following questions (arb v7.0):
@@ -19,7 +20,7 @@ apptainer build -F arb-7.0.sif arb-7.0.def
 ## Usage
 On biocloud running this script will run the container with all Ceph mount points mounted inside the container. Adjust to suit your needs elsewhere.
 ```
-bash run.sh
+./arb7
 ```
 
 ## Notes

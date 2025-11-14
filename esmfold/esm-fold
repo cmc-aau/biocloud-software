@@ -10,16 +10,6 @@ while [ -h "$SOURCE" ]; do
 done
 EXEC_DIRNAME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
-# create tmp folder for arb in our home folder and create the file
-arbtmp="${HOME}/.tmp/arb7"
-filename="names_start.dat"
-file_path="${arbtmp}/${filename}"
-mkdir -p "$arbtmp"
-touch "${file_path}"
-
-# run arb from the container
+# run the container
 export APPTAINER_BIND="/raw_data,/databases,/projects"
-apptainer run \
-  -B "${file_path}":/opt/arb/lib/nas/names_start.dat \
-  -B ~/.Xauthority \
-  "$EXEC_DIRNAME/arb-7.0.sif" "$@"
+apptainer run -nvccli "$EXEC_DIRNAME/esmfold.sif" "$@"

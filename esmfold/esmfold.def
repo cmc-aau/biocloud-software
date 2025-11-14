@@ -1,0 +1,11 @@
+Bootstrap: docker
+From: biochunan/esmfold-image:root-devel#ab1eda38872c
+
+%environment
+  PATH="/miniconda/bin:${PATH}"
+  source /miniconda/etc/profile.d/conda.sh
+  conda activate py39-esmfold
+
+#not sure this is even needed
+%runscript
+  conda run -n py39-esmfold esm-fold "$@"
