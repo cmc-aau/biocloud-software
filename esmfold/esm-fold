@@ -12,4 +12,4 @@ EXEC_DIRNAME="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 # run the container
 export APPTAINER_BIND="/raw_data,/databases,/projects"
-apptainer run -nvccli "$EXEC_DIRNAME/esmfold.sif" "$@"
+apptainer run --nv "$EXEC_DIRNAME/esmfold.sif" "$@"
